@@ -8,7 +8,8 @@ COPY lib/ ./lib/
 COPY scripts/ ./scripts/
 COPY tailwind.config.cjs ./
 RUN npm run build:ui && npm prune --omit=dev
-RUN ln -s /app/bin/alphaclaw.js /usr/local/bin/alphaclaw && chmod +x /app/bin/alphaclaw.js
+RUN ln -s /app/bin/alphaclaw.js /usr/local/bin/alphaclaw && chmod +x /app/bin/alphaclaw.js \
+ && ln -s /app/node_modules/.bin/openclaw /usr/local/bin/openclaw
 ENV ALPHACLAW_ROOT_DIR=/data
 EXPOSE 3000
 ENTRYPOINT ["/usr/bin/tini", "--"]
