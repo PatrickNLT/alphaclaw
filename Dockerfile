@@ -1,10 +1,10 @@
-FROM node:22-slim
+FROM node:26.1.0-slim
 RUN apt-get update && apt-get install -y git curl procps cron tini bsdextrautils && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 COPY package.json package-lock.json ./
+COPY lib/ ./lib/
 RUN npm ci
 COPY bin/ ./bin/
-COPY lib/ ./lib/
 COPY scripts/ ./scripts/
 COPY tailwind.config.cjs ./
 RUN npm run build:ui && npm prune --omit=dev
